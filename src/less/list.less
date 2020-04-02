@@ -1,0 +1,94 @@
+.list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	>li{
+		padding: @btn-padding-y @btn-padding-x;
+		font-size:  @font-size-base;
+		line-height: @btn-line-height;
+		color: @color-text;
+		background: transparent;
+	}
+	>li.separator {
+		border-width: 0;
+		border-top: @hr-size solid @hr-color;
+	}
+	i.mdi {
+		vertical-align: middle;
+	}
+}
+
+.list-lg {
+	>li {
+		padding: @btn-padding-y-lg @btn-padding-x-lg;
+		font-size:  @font-size-lg;
+		line-height: @btn-line-height-lg;
+	}
+}
+
+.list-sm {
+	>li {
+		padding: @btn-padding-y-sm @btn-padding-x-sm;
+		font-size:  @font-size-sm;
+		line-height: @btn-line-height-sm;
+		border-radius: @btn-border-radius-sm;
+	}
+}
+
+
+.list-color(@indx, @color, @color-hover, @background, @background-hover, @border) {
+	&.list-@{indx} {
+		background-color: @background;
+		>li.separator {
+			border-color: @border;
+		}
+		>li {
+			color: @color;
+		}
+	}
+}
+
+.list-colors(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: ~"color-@{indx}-sd";
+	.list-color(@indx, @color-text-l, @color-text-l, @@color, @@hover, @color-text-tl);
+	.list-colors(@n, (@i + 1));
+}
+
+.list-colors(length(@buttons));
+
+.list-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons-simple, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: darken(@@color, 10%);
+	@border: lighten(@@color, 10%);
+	.list-color(@indx, @color-text-l, @color-text-l, @@color, @hover, @color-text-tl);
+	.list-colors-simple(@n, (@i + 1));
+}
+
+.list-colors-simple(length(@buttons-simple));
+
+.list-flat {
+	.list-colors(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: ~"color-@{indx}-sd";
+		@border: ~"color-@{indx}-sl";
+		.list-color(@indx, @@color, @@hover, transparent, fade(@@color, 10%), @@border);
+		.list-colors(@n, (@i + 1));
+	}
+
+	.list-colors(length(@buttons));
+
+	.list-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons-simple, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: darken(@@color, 10%);
+		@border: lighten(@@color, 10%);
+		.list-color(@indx, @@color, @hover, transparent, fade(@@color, 10%), @border);
+		.list-colors-simple(@n, (@i + 1));
+	}
+
+	.list-colors-simple(length(@buttons-simple));
+}

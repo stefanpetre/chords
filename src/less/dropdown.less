@@ -1,0 +1,37 @@
+.dropdown {
+	position: relative;
+	&.dropdown-open {
+		.dropdown-container {
+			display: block;
+		}
+	}
+}
+.dropdown-container {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: none;
+	z-index: 1000;
+	//min-width: rem(150px);
+	&.dropdown-up {
+		top: auto;
+		bottom: 100%;
+	}
+	&.dropdown-right {
+		left: auto;
+		right: 0;
+	}
+	&.dropdown-overlap {
+		top: 0;
+		&.dropdown-up {
+			bottom: 0;
+		}
+	}
+	&.dropdown-stretch {
+		min-width: 100%;
+	}
+	&.dropdown-middle {
+		top: 35%;
+		transform: translateY(-35%);
+	}
+}

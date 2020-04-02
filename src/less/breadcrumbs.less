@@ -1,0 +1,26 @@
+.breadcrumbs{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	a {
+		text-decoration: none;
+		display: inline-block;
+		position: relative;
+		color: @color-text-td;
+		font-size: 12px;
+		text-transform: uppercase;
+	}
+	li {
+		display: inline-block;
+		margin: 0;
+		&.current a {
+			color: @color-text-d;
+		}
+	}
+	li+li:before {
+		content: "/ ";
+		//font-family: "Material Design Icons";
+		color: @color-text-td;
+		font-size: 12px;
+	}
+}

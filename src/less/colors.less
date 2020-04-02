@@ -1,0 +1,16 @@
+.text-colors(@n, @i: 0) when (@i =< @n - 1) {
+	@color: extract(@colors, @i + 1);
+	@name: extract(@colors-names, @i + 1);
+	.property(~"color-@{name}", color, @color);
+	.property(~"links-@{name} a", color, @color);
+	.text-colors(@n, (@i + 1));
+}
+.text-colors(length(@colors));
+
+.property(~"color-text", color, @color-text);
+.property(~"color-text-l", color, @color-text-l);
+.property(~"color-text-sl", color, @color-text-sl);
+.property(~"color-text-tl", color, @color-text-tl);
+.property(~"color-text-d", color, @color-text-d);
+.property(~"color-text-sd", color, @color-text-sd);
+.property(~"color-text-td", color, @color-text-td);

@@ -1,0 +1,143 @@
+.nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	>li {
+		margin: 0;
+	}
+	>li.separator {
+		border-width: 0;
+		border-top: @hr-size solid @hr-color;
+	}
+	>li>a,
+	>li>.dropdown>a{
+		display: block;
+		padding: @btn-padding-y @btn-padding-x;
+		font-size:  @font-size-base;
+		line-height: @btn-line-height;
+		color: @color-text;
+		background: transparent;
+		&:hover,
+			&:focus,
+			&.active {
+			text-decoration: none;
+			background: rgba(0,0,0,.1);
+		}
+	}
+}
+
+.nav-inline {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 0;
+	>li {
+		display: inline-block;
+		margin: 0;
+	}
+	>li.separator {
+		border-left: @hr-size solid @hr-color;
+	}
+	>li>a,
+	>li>.dropdown>a {
+		display: inline-block;
+		padding: @btn-padding-y @btn-padding-x;
+		font-size:  @font-size-base;
+		line-height: @btn-line-height;
+		color: @color-text;
+		background: transparent;
+		&:hover,
+			&:focus,
+			&.active {
+			text-decoration: none;
+			background: rgba(0,0,0,.1);
+		}
+	}
+}
+
+.nav-lg {
+	>li>a,
+	>li>.dropdown>a {
+		padding: @btn-padding-y-lg @btn-padding-x-lg;
+		font-size:  @font-size-lg;
+		line-height: @btn-line-height-lg;
+	}
+}
+
+.nav-sm {
+	>li>a,
+	>li>.dropdown>a {
+		padding: @btn-padding-y-sm @btn-padding-x-sm;
+		font-size:  @font-size-sm;
+		line-height: @btn-line-height-sm;
+		border-radius: @btn-border-radius-sm;
+	}
+}
+
+
+.nav-color(@indx, @color, @color-hover, @background, @background-hover, @border) {
+	&.nav-@{indx} {
+		background-color: @background;
+		>li.separator {
+			border-color: @border;
+		}
+		>li>a,
+		>li>.dropdown>a {
+			color: @color;
+			&:hover,
+			&:focus,
+			&.active {
+				color: @color-hover;
+				background-color: @background-hover;
+			}
+		}
+	}
+}
+
+.nav-colors(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: ~"color-@{indx}-sd";
+	.nav-color(@indx, @color-text-l, @color-text-l, @@color, @@hover, @color-text-tl);
+	.nav-colors(@n, (@i + 1));
+}
+
+.nav-colors(length(@buttons));
+
+.nav-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons-simple, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: darken(@@color, 10%);
+	@border: lighten(@@color, 10%);
+	.nav-color(@indx, @color-text-l, @color-text-l, @@color, @hover, @color-text-tl);
+	.nav-colors-simple(@n, (@i + 1));
+}
+.nav-color(white, @color-text-d, @color-text-d, @color-white, darken(@color-white, 10%), darken(@color-white, 10%));
+
+.nav-colors-simple(length(@buttons-simple));
+
+.nav-flat {
+	.nav-colors(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: ~"color-@{indx}-sd";
+		@border: ~"color-@{indx}-sl";
+		.nav-color(@indx, @@color, @@hover, transparent, fade(@@color, 10%), @@border);
+		.nav-colors(@n, (@i + 1));
+	}
+
+	.nav-colors(length(@buttons));
+
+	.nav-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons-simple, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: darken(@@color, 10%);
+		@border: lighten(@@color, 10%);
+		.nav-color(@indx, @@color, @hover, transparent, fade(@@color, 10%), @border);
+		.nav-colors-simple(@n, (@i + 1));
+	}
+
+	.nav-colors-simple(length(@buttons-simple));
+	
+	.nav-color(white, @color-text-l, @color-text-l, transparent, fade(@color-white, 10%), darken(@color-white, 10%));
+}

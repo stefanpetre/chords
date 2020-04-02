@@ -1,0 +1,139 @@
+@import "variables.less";
+@import "mixins.less";
+@import "reset.less";
+@import "container.less";
+@import "grid.less";
+@import "margins.less";
+@import "paddings.less";
+@import "display.less";
+@import "type.less";
+@import "table.less";
+@import "borders.less";
+@import "background.less";
+@import "colors.less";
+@import "cover.less";
+@import "shadow.less";
+@import "buttons.less";
+@import "forms.less";
+@import "animate.less";
+@import "progress.less";
+@import "group.less";
+@import "list.less";
+@import "nav.less";
+@import "breadcrumbs.less";
+@import "dropdown.less";
+@import "modal.less";
+@import "slider.less";
+@import "steps.less";
+@import "gallery.less";
+
+.trackbox {
+    border-radius: @radius;
+    background: @color-grey-tl;
+    padding: @gutter;
+    margin: @gutter 0;
+
+    input[type=range] {
+        background: @color-grey-tl;
+    }
+}
+
+.title {
+    display: block;
+    width: 100%;
+    text-align: left;
+    .mdi {
+        &:first-child {
+            display: inline-block;
+        }
+        &:last-child {
+            display: none;
+        }
+    }
+}
+
+.settings {
+    display: none;
+    padding: @gutter;
+}
+.open {
+    >.settings {
+        display: block;
+    }
+    .title .mdi {
+        &:first-child {
+            display: none;
+        }
+        &:last-child {
+            display: inline-block;
+        }
+    }
+}
+
+.chordbox {
+    background: @color-primary;
+    color: @color-text-l;
+    border-radius: @radius;
+    margin: @gutter/2 0;
+    .text-box();
+    .btn {
+        box-shadow: none !important;
+    }
+
+    input[type=number] {
+        width: 60px;
+    }
+}
+
+.scalebox {
+    border-radius: @radius;
+    background: @color-grey-tl;
+    //padding: @gutter;
+    margin: @gutter 0;
+}
+.pianoroll {
+	.flexbox();
+    .flexbox-wrap();
+    .key {
+        .flex(0, 0, auto);
+        width: 40px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        background: #fff;
+        color: #000;
+        border-radius: 0 0 @radius @radius;
+        border: 1px solid transparent;
+        cursor: default;
+        &.black {
+            background: #000;
+            color: #fff;
+        }
+    }
+    &.interactive {
+        .key {
+            cursor: pointer;
+        }
+        .key:hover {
+            border-color: @color-primary-sl;
+        }
+    }
+}
+
+
+.drop-container {
+    position: absolute;
+    opacity: 1;
+}
+.drop-above {
+    border-top: 4px solid @color-secondary;
+}
+.drop-bellow {
+    border-bottom: 4px solid @color-secondary;
+}
+.drop-before {
+    border-left: 4px solid @color-secondary;
+}
+.drop-after {
+    border-right: 4px solid @color-secondary;
+}

@@ -1,0 +1,29 @@
+.backgrounds(@n, @i: 0) when (@i =< @n - 1) {
+	@color: extract(@colors, @i + 1);
+	@name: extract(@colors-names, @i + 1);
+	.property(~"bg-@{name}", background-color, @color);
+	.backgrounds(@n, (@i + 1));
+}
+.backgrounds(length(@colors));
+
+.bg-repeat {
+	background-repeat: repeat;
+}
+.bg-norepeat {
+	background-repeat: no-repeat;
+}
+.bg-repeat-x {
+	background-repeat: repeat-x;
+}
+.bg-repeat-y {
+	background-repeat: repeat-y;
+}
+.bg-auto {
+	background-size: auto;
+}
+.bg-cover {
+	background-size: cover;
+}
+.bg-contain {
+	background-size: contain;
+}

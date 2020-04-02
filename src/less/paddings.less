@@ -1,0 +1,7 @@
+.paddings(@n, @i: 0) when (@i =< @n - 1) {
+	@size: extract(@sizes, @i + 1);
+	@space: extract(@spacers, @i + 1);
+	.space(padding, ~"p-@{size}", @space);
+	.paddings(@n, (@i + 1));
+}
+.paddings(length(@spacers));

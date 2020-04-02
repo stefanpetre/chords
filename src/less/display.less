@@ -1,0 +1,40 @@
+.display(@size) {
+	.d-@{size}-none         { display: none !important; }
+	.d-@{size}-inline       { display: inline !important; }
+	.d-@{size}-inline-block { display: inline-block !important; }
+	.d-@{size}-block        { display: block !important; }
+	.d-@{size}-table        { display: table !important; }
+	.d-@{size}-table-row    { display: table-row !important; }
+	.d-@{size}-table-cell   { display: table-cell !important; }
+	.d-@{size}-flex         { display: flex !important; }
+	.d-@{size}-inline-flex  { display: inline-flex !important; }
+}
+
+.display(xs);
+
+@media (min-width: @bp-sm) {
+	.display(sm);
+}
+@media (min-width: @bp-md) {
+	.display(md);
+}
+@media (min-width: @bp-lg) {
+	.display(lg);
+}
+@media (min-width: @bp-xl) {
+	.display(xl);
+}
+
+.hidden {
+	visibility: hidden;
+}
+.visible {
+	visibility: visible;
+}
+
+.float-right {
+	float: right;
+}
+.float-left {
+	float: left;
+}

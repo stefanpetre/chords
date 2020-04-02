@@ -1,0 +1,144 @@
+.btn {
+	display: inline-block;
+	font-weight: @btn-font-weight;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	user-select: none;
+	border: @btn-border-width solid transparent;
+	padding: @btn-padding-y @btn-padding-x;
+	font-size:  @font-size-base;
+	line-height: @btn-line-height;
+	border-radius: @btn-border-radius;
+	transition: @btn-transition;
+
+	// Share hover and focus styles
+	&:hover,
+		&:focus {
+		text-decoration: none;
+	}
+
+	&:focus,
+		&.focus {
+		outline: 0;
+		box-shadow: @btn-focus-box-shadow;
+	}
+
+	// Disabled comes first so active can properly restyle
+	&.disabled,
+	&:disabled {
+		opacity: @btn-disabled-opacity;
+		.box-shadow(none);
+	}
+
+	// Opinionated: add "hand" cursor to non-disabled .btn elements
+	&:not(:disabled):not(.disabled) {
+		cursor: pointer;
+	}
+
+	&:not(:disabled):not(.disabled):active,
+		&:not(:disabled):not(.disabled).active {
+		background-image: none;
+		.box-shadow(@btn-active-box-shadow);
+
+		&:focus {
+			.box-shadow(~"@{btn-focus-box-shadow}, @{btn-active-box-shadow}");
+		}
+	}
+}
+.btn-lg {
+	padding: @btn-padding-y-lg @btn-padding-x-lg;
+	font-size:  @font-size-lg;
+	line-height: @btn-line-height-lg;
+	border-radius: @btn-border-radius-lg;
+}
+
+.btn-sm {
+	padding: @btn-padding-y-sm @btn-padding-x-sm;
+	font-size:  @font-size-sm;
+	line-height: @btn-line-height-sm;
+	border-radius: @btn-border-radius-sm;
+}
+
+.button-color(@indx, @color, @color-hover, @background, @background-hover, @border, @border-hover) {
+	&.btn-@{indx} {
+		color: @color;
+		background-color: @background;
+		border-color: @border;
+		&:hover {
+			color: @color-hover;
+			background-color: @background-hover;
+			border-color: @border-hover;
+		}
+	}
+}
+
+@buttons: primary, secondary, vibrant, grey;
+@buttons-simple: alert, success, link, black;
+
+.buttons-colors(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: ~"color-@{indx}-sd";
+	.button-color(@indx, @color-text-l, @color-text-l, @@color, @@hover, @@color, @@hover);
+	.buttons-colors(@n, (@i + 1));
+}
+
+.buttons-colors(length(@buttons));
+
+.buttons-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+	@indx: extract(@buttons-simple, @i + 1);
+	@color: ~"color-@{indx}";
+	@hover: darken(@@color, 10%);
+	.button-color(@indx, @color-text-l, @color-text-l, @@color, @hover, @@color, @hover);
+	.buttons-colors-simple(@n, (@i + 1));
+}
+
+.buttons-colors-simple(length(@buttons-simple));
+
+.button-color(white, @color-text-d, @color-text-d, @color-white, darken(@color-white, 10%), @color-white, darken(@color-white, 10%));
+
+.btn-flat {
+
+	.buttons-colors(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: ~"color-@{indx}-sd";
+		.button-color(@indx, @@color, @@hover, transparent, fade(@@color, 10%), transparent, fade(@@color, 10%));
+		.buttons-colors(@n, (@i + 1));
+	}
+
+	.buttons-colors(length(@buttons));
+
+	.buttons-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons-simple, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: darken(@@color, 10%);
+		.button-color(@indx, @@color, @hover, transparent, fade(@@color, 10%), transparent, fade(@@color, 10%));
+		.buttons-colors-simple(@n, (@i + 1));
+	}
+
+	.buttons-colors-simple(length(@buttons-simple));
+}
+.btn-outline {
+
+	.buttons-colors(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: ~"color-@{indx}-sd";
+		.button-color(@indx, @@color, @@hover, transparent, fade(@@color, 10%), @@color, @@hover);
+		.buttons-colors(@n, (@i + 1));
+	}
+
+	.buttons-colors(length(@buttons));
+
+	.buttons-colors-simple(@n, @i: 0) when (@i =< @n - 1) {
+		@indx: extract(@buttons-simple, @i + 1);
+		@color: ~"color-@{indx}";
+		@hover: darken(@@color, 10%);
+		.button-color(@indx, @@color, @hover, transparent, fade(@@color, 10%), @@color, @hover);
+		.buttons-colors-simple(@n, (@i + 1));
+	}
+
+	.buttons-colors-simple(length(@buttons-simple));
+}

@@ -1,0 +1,7 @@
+.margins(@n, @i: 0) when (@i =< @n - 1) {
+	@size: extract(@sizes, @i + 1);
+	@space: extract(@spacers, @i + 1);
+	.space(margin, ~"m-@{size}", @space);
+	.margins(@n, (@i + 1));
+}
+.margins(length(@spacers));
